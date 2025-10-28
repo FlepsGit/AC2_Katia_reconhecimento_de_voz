@@ -30,15 +30,7 @@ def extract_features(file_path):
     mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=60)
     return np.mean(mfccs.T, axis=0)
 
-def augment_audio(y, sr):
-    # 1. mudar o pitch
-    y_pitch = librosa.effects.pitch_shift(y, sr, n_steps=np.random.randint(-2, 3))
-    # 2. mudar a velocidade
-    y_speed = librosa.effects.time_stretch(y, rate=np.random.uniform(0.9, 1.1))
-    # 3. adicionar ruído branco
-    noise = np.random.randn(len(y))
-    y_noise = y + 0.005 * noise
-    return [y_pitch, y_speed, y_noise]
+
 
 # ===============================
 #  CARREGAR E PROCESSAR OS DADOS
